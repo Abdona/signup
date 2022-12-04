@@ -1,11 +1,13 @@
 <?php
 
 
+use App\Form;
+use App\Routing\Routing;
 use App\Test;
 
 require_once realpath('../vendor/autoload.php') ;
 
 
-$test = new Test();
+$route = new Routing();
 
-$test->test();
+$route->route('/');
