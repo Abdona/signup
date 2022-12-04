@@ -16,6 +16,8 @@
   },
   "require": {
     "php": ">=7.2.5",
-    "ext-http": "*"
+    "ext-http": "*",
+    "ext-pdo": "*",
+    "ext-mysqli": "*"
   }
 }
