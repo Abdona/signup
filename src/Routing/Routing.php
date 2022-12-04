@@ -9,7 +9,13 @@ class Routing
         switch ($url){
             case '':
             case '/':
-                require __DIR__ . '\..\..\documents\index.php';
+                header('Location:'. '/documents/home.php');
+                break;
+            case '/login':
+                header('Location:'. '/documents/logging.php');
+                break;
+            case '/signup':
+                header('Location:'. '/documents/signup.php');
                 break;
         }
     }
