@@ -11,9 +11,8 @@ class Form
     private string $email;
     private string $mobileNumber;
     private string $password;
-    private string $dayOfBirth;
-    private string $monthOfBirth;
-    private string $yearOfBirth;
+    private string $birthDate;
+    private string $address;
 
     public function __construct(
         string $userName,
@@ -23,9 +22,8 @@ class Form
         string $email,
         string $mobileNumber,
         string $password,
-        string $dayOfBirth,
-        string $monthOfBirth,
-        string $yearOfBirth
+        string $birthDate,
+        string $address
 
     )
     {
@@ -36,9 +34,28 @@ class Form
         $this->email = $email;
         $this->mobileNumber = $mobileNumber;
         $this->password = $password;
-        $this->dayOfBirth = $dayOfBirth;
-        $this->monthOfBirth = $monthOfBirth;
-        $this->yearOfBirth = $yearOfBirth;
+        $this->birthDate = $birthDate;
+        $this->address = $address;
+    }
+
+    public function getBirthDate(): string
+    {
+        return $this->birthDate;
+    }
+
+    public function setBirthDate(string $birthDate): void
+    {
+        $this->birthDate = $birthDate;
+    }
+
+    public function getAddress(): string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): void
+    {
+        $this->address = $address;
     }
 
     public function getUserName(): string
@@ -111,33 +128,4 @@ class Form
         $this->password = $password;
     }
 
-    public function getDayOfBirth(): string
-    {
-        return $this->dayOfBirth;
-    }
-
-    public function setDayOfBirth(string $dayOfBirth): void
-    {
-        $this->dayOfBirth = $dayOfBirth;
-    }
-
-    public function getMonthOfBirth(): string
-    {
-        return $this->monthOfBirth;
-    }
-
-    public function setMonthOfBirth(string $monthOfBirth): void
-    {
-        $this->monthOfBirth = $monthOfBirth;
-    }
-
-    public function getYearOfBirth(): string
-    {
-        return $this->yearOfBirth;
-    }
-
-    public function setYearOfBirth(string $yearOfBirth): void
-    {
-        $this->yearOfBirth = $yearOfBirth;
-    }
 }

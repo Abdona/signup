@@ -5,12 +5,9 @@ use App\Routing\Routing;
 
 require_once realpath('../vendor/autoload.php') ;
 
-//$route = new Routing();
+$route = new Routing();
 
 //echo $_SERVER['REQUEST_URI'];
 
-//if (isset($_SERVER['REQUEST_URI']))
-    //$route->route($_SERVER['REQUEST_URI']);
-$dataBase = new Database();
-
-echo $dataBase->addNewUser();
+if (isset($_SERVER['REQUEST_URI']))
+    $route->route($_SERVER['REQUEST_URI']);

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Database;
+use App\Form;
 use mysqli;
 use mysqli_sql_exception;
 
@@ -10,22 +11,49 @@ class Database
     private string $username = "root";
     private string $password = "aaammsn1433";
     private string $dataBaseName = "userlogin";
+    private Form $form;
 
-    private function connectTODataBaser(): ?mysqli
+    public function __construct(Form $form)
     {
-        return new mysqli($this->servername,'root',$this->password,$this->dataBaseName);
+        $this->form = $form;
+    }
+
+    private function connectTODataBase(): ?mysqli
+    {
+        return new mysqli($this->servername,$this->username,$this->password,$this->dataBaseName);
     }
 
     public function addNewUser(){
         try {
-            $conn = $this->connectTODataBaser();
+            $conn = $this->connectTODataBase();
             $sql = "INSERT INTO user (
                   user_name,first_name,last_name,birth_day,nationality,
                   address,email,mobile,login_password
-                  ) value ('ahmedhima','ahmed','naser','28/05/3333','egyptian',
-                            'am gleisdreieck 10a','safsdgsdg@gmail.com',
-                            '235235325235','asff@Qsdsdgdg');";
-            if ($conn->query($sql) === TRUE){
+                  ) value (?,?,?,?,?,?,?,?,?);";
+            $stmt = $conn->prepare($sql);
+            $userName = $this->form->getUserName();
+            $firstName = $this->form->getFirstName();
+            $lastName = $this->form->getLastName();
+            $birthDate = $this->form->getBirthDate();
+            $nationality = $this->form->getNationality();
+            $address = $this->form->getAddress();
+            $email = $this->form->getEmail();
+            $mobileNumber = $this->form->getMobileNumber();
+            $password = $this->form->getPassword();
+
+            $stmt->bind_param("sssssssss",
+                $userName,
+                $firstName,
+                $lastName,
+                $birthDate,
+                $nationality,
+                $address,
+                $email,
+                $mobileNumber,
+                $password
+            );
+
+            if ($stmt->execute() === TRUE){
                 return 'added';
             }else{
                 return "Error: " . $sql . "<br>" . $conn->error;

@@ -4,7 +4,7 @@ namespace App\Routing;
 
 class Routing
 {
-    public function route (string $url)
+    public function route (string $url): void
     {
         switch ($url){
             case '':
@@ -16,6 +16,9 @@ class Routing
                 break;
             case '/signup':
                 header('Location:'. '/documents/signup.php');
+                break;
+            case '/loginSuccessfully':
+                header('Location:'. '/documents/logginSuccess.php');
                 break;
         }
     }
