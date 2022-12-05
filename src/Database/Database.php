@@ -11,19 +11,14 @@ class Database
     private string $username = "root";
     private string $password = "aaammsn1433";
     private string $dataBaseName = "userlogin";
-    private Form $form;
 
-    public function __construct(Form $form)
-    {
-        $this->form = $form;
-    }
 
     private function connectTODataBase(): ?mysqli
     {
         return new mysqli($this->servername,$this->username,$this->password,$this->dataBaseName);
     }
 
-    public function addNewUser(){
+    public function addNewUser(Form $form){
         try {
             $conn = $this->connectTODataBase();
             $sql = "INSERT INTO user (
@@ -31,15 +26,15 @@ class Database
                   address,email,mobile,login_password
                   ) value (?,?,?,?,?,?,?,?,?);";
             $stmt = $conn->prepare($sql);
-            $userName = $this->form->getUserName();
-            $firstName = $this->form->getFirstName();
-            $lastName = $this->form->getLastName();
-            $birthDate = $this->form->getBirthDate();
-            $nationality = $this->form->getNationality();
-            $address = $this->form->getAddress();
-            $email = $this->form->getEmail();
-            $mobileNumber = $this->form->getMobileNumber();
-            $password = $this->form->getPassword();
+            $userName = $form->getUserName();
+            $firstName = $form->getFirstName();
+            $lastName = $form->getLastName();
+            $birthDate = $form->getBirthDate();
+            $nationality = $form->getNationality();
+            $address = $form->getAddress();
+            $email = $form->getEmail();
+            $mobileNumber = $form->getMobileNumber();
+            $password = $form->getPassword();
 
             $stmt->bind_param("sssssssss",
                 $userName,
@@ -60,7 +55,30 @@ class Database
             }
         }
         catch (mysqli_sql_exception $exception){
+            echo 'ERROR: '.$exception;
+        }
+    }
+
+    public function getUser (string $userName, string $password):void
+    {
+        $conn = $this->connectTODataBase();
+        $sql = "SELECT * FROM user WHERE user_name = ?;";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('s', $userName);
+
+        try {
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $user = $result->fetch_assoc();
+            if($user !== null && $user['login_password'] === $password ){
+                echo 'login sucess';
+            }else
+                echo 'login failed';
+            }
+        catch (mysqli_sql_exception $exception)
+        {
             echo 'ERROR';
         }
+
     }
 }

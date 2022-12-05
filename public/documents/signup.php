@@ -40,6 +40,7 @@ require_once realpath('../../vendor/autoload.php') ;
 use App\Form;
 use App\Routing\Request;
 use App\Routing\Routing;
+use App\Database\Database;
 
 if(isset($_POST['submit'])){
     $req = new Request($_POST);
@@ -59,7 +60,7 @@ if(isset($_POST['submit'])){
             $_POST['birth_date'],
             $_POST['address']
     );
-    $db = new App\Database\Database($form);
-    $db->addNewUser();
+    $db = new Database();
+    $db->addNewUser($form);
     $route->route('/loginSuccessfully');
 }
