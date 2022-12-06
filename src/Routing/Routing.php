@@ -12,6 +12,7 @@ class Routing
         switch ($url){
             case '':
             case '/':
+            case 'return':
                 header('Location:'. '/documents/home.php');
                 break;
             case '/login':
@@ -20,8 +21,14 @@ class Routing
             case '/signup':
                 header('Location:'. '/documents/signup.php');
                 break;
-            case '/loginSuccessfully':
-                header('Location:'. '/documents/logginSuccess.php');
+            case '/signup_success':
+                header('Location:'. '/documents/signup_success.php');
+                break;
+            case '/login_successfully':
+                header('Location:'. '/documents/login_success.php');
+                break;
+            case '/login_failed':
+                header('Location:'. '/documents/login_failed.php');
                 break;
             case '/formAction':
                 $formAction = new FormAction;

@@ -23,7 +23,8 @@ class FormAction
         $requestType = $_REQUEST['requestType'];
 
         if ('loggin'===$requestType) {
-            $this->database->getUser($_POST['username'], $_POST['password']);
+            $dataBaseResponse = $this->database->getUser($_POST['username'], $_POST['password']);
+            ($dataBaseResponse)?$this->routing->route('/login_successfully'):$this->routing->route('/login_failed');
         }elseif ("signup" === $requestType){
             $this->form->setForm(
                 $_REQUEST['user_name'],
@@ -36,9 +37,8 @@ class FormAction
                 $_REQUEST['birth_date'],
                 $_REQUEST['address']
             );
-
             $this->database->addNewUser($this->form);
+            $this->routing->route('/signup_success');
         }
-        $this->routing->route('');
     }
 }
