@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Form;
 
 class Form
 {
@@ -14,18 +14,17 @@ class Form
     private string $birthDate;
     private string $address;
 
-    public function __construct(
-        string $userName,
-        string $firstName,
-        string $lastName,
-        string $nationality,
-        string $email,
-        string $mobileNumber,
-        string $password,
-        string $birthDate,
-        string $address
-
-    )
+    public function setForm (
+        $userName,
+        $firstName,
+        $lastName,
+        $nationality,
+        $email,
+        $mobileNumber,
+        $password,
+        $birthDate,
+        $address
+    ): void
     {
         $this->userName = $userName;
         $this->firstName = $firstName;
@@ -43,19 +42,9 @@ class Form
         return $this->birthDate;
     }
 
-    public function setBirthDate(string $birthDate): void
-    {
-        $this->birthDate = $birthDate;
-    }
-
     public function getAddress(): string
     {
         return $this->address;
-    }
-
-    public function setAddress(string $address): void
-    {
-        $this->address = $address;
     }
 
     public function getUserName(): string
@@ -63,19 +52,9 @@ class Form
         return $this->userName;
     }
 
-    public function setUserName(string $userName): void
-    {
-        $this->userName = $userName;
-    }
-
     public function getFirstName(): string
     {
         return $this->firstName;
-    }
-
-    public function setFirstName(string $firstName): void
-    {
-        $this->firstName = $firstName;
     }
 
     public function getLastName(): string
@@ -83,19 +62,9 @@ class Form
         return $this->lastName;
     }
 
-    public function setLastName(string $lastName): void
-    {
-        $this->lastName = $lastName;
-    }
-
     public function getNationality(): string
     {
         return $this->nationality;
-    }
-
-    public function setNationality(string $nationality): void
-    {
-        $this->nationality = $nationality;
     }
 
     public function getEmail(): string
@@ -103,29 +72,13 @@ class Form
         return $this->email;
     }
 
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
-    }
-
     public function getMobileNumber(): string
     {
         return $this->mobileNumber;
-    }
-
-    public function setMobileNumber(string $mobileNumber): void
-    {
-        $this->mobileNumber = $mobileNumber;
     }
 
     public function getPassword(): string
     {
         return $this->password;
     }
-
-    public function setPassword(string $password): void
-    {
-        $this->password = $password;
-    }
-
 }

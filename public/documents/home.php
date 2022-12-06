@@ -6,7 +6,7 @@
 </head>
 <body>
 <nav>
-    <form action="#" method="post">
+    <form action="../index.php" method="post">
         <label>
             <input name="submit" value="true" hidden>
         </label>
@@ -19,13 +19,3 @@
 </p>
 </body>
 </html>
-
-<?php
-
-require_once realpath('../../vendor/autoload.php') ;
-use App\Routing\Routing;
-
-if(isset($_POST['submit'])){
-    $route = new Routing();
-    $route->route($_POST['type']);
-}

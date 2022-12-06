@@ -6,9 +6,9 @@
 </head>
 <body>
 <nav>
-    <form action="#" method="post">
+    <form action="../index.php" method="post">
         <label>
-            <input name="submit" value="true" hidden>
+            <input name="requestType" value="signup" hidden>
         </label>
         <div>
             <label for="user_name">Benutzer Name: </label><input type="text" id="user_name" name="user_name" value="">
@@ -27,40 +27,9 @@
         </div>
         <br>
         <br>
-        <button name="type" value="login">anmelden</button>
+        <button name="type" value="/formAction">anmelden</button>
         <button name="type" value="return">zurück</button>
     </form>
 </nav>
 </body>
 </html>
-<?php
-
-require_once realpath('../../vendor/autoload.php') ;
-
-use App\Form;
-use App\Routing\Request;
-use App\Routing\Routing;
-use App\Database\Database;
-
-if(isset($_POST['submit'])){
-    $req = new Request($_POST);
-    $route = new Routing();
-    if ($_POST['type'] === 'return'){
-        $route->route('');
-    }
-    $form = new Form
-    (
-            $_POST['user_name'],
-            $_POST['first_name'],
-            $_POST['last_name'],
-            $_POST['nationality'],
-            $_POST['email'],
-            $_POST['mobile'],
-            $_POST['password'],
-            $_POST['birth_date'],
-            $_POST['address']
-    );
-    $db = new Database();
-    $db->addNewUser($form);
-    $route->route('/loginSuccessfully');
-}

@@ -14,7 +14,6 @@
 require_once realpath('../../vendor/autoload.php') ;
 use App\Routing\Routing;
 
-var_dump($_POST);
 //$route = new Routing();
 //$route->route('');
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Database;
-use App\Form;
+use App\Form\Form;
 use mysqli;
 use mysqli_sql_exception;
 

@@ -2,6 +2,9 @@
 
 namespace App\Routing;
 
+
+use App\Form\FormAction;
+
 class Routing
 {
     public function route (string $url): void
@@ -20,6 +23,9 @@ class Routing
             case '/loginSuccessfully':
                 header('Location:'. '/documents/logginSuccess.php');
                 break;
+            case '/formAction':
+                $formAction = new FormAction;
+                $formAction();
         }
     }
 }

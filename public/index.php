@@ -7,7 +7,9 @@ require_once realpath('../vendor/autoload.php') ;
 
 $route = new Routing();
 
-//echo $_SERVER['REQUEST_URI'];
+echo $_REQUEST['type'];
 
-if (isset($_SERVER['REQUEST_URI']))
-    $route->route($_SERVER['REQUEST_URI']);
+if (isset($_REQUEST['type']))
+    $route->route($_REQUEST['type']);
+else
+    $route->route('');
