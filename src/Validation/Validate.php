@@ -3,84 +3,103 @@ declare(strict_types=1);
 
 namespace App\Validation;
 
-use App\Form;
+
+use App\Form\Form;
 
 class Validate
 {
-    private Form $form;
 
-    public function __construct(Form $form)
+    private Form $form;
+    private ValidationCollection $message;
+
+    public function __construct(Form $form, ValidationCollection $message)
     {
         $this->form = $form;
+        $this->message = $message;
     }
 
-    public function validate ():bool
+    public function validate(): ValidationCollection
     {
-        $formCheck = false;
-        $formCheck = $this->validateUserName();
-        $formCheck = $this->validateFirstName();
-        $formCheck = $this->validateLastName();
-        $formCheck = $this->validateNationalityName();
-        $formCheck = $this->validateEmail();
-        $formCheck = $this->validateMobileNumber();
-        $formCheck = $this->validatePassword();
-
-        return $formCheck;
+        return $this->message;
     }
 
-    private function validateUserName():bool
+    private function validateUserName(): void
     {
-        if($this->form->getUserName() !== ""){
-            return true;
+        if (
+            $this->form->getUserName() === "" ||
+            strlen($this->form->getUserName()) < 3 ||
+            false === preg_match("/^[a-zA-Z].*/", $this->form->getUserName())
+        ) {
+            $this->message->pushMessage('user name', false);
         }
-        return false;
     }
 
-    private function validateFirstName():bool
+    private function validateFirstName(): void
     {
-        if($this->form->getFirstName() !== ""){
-            return true;
+        if (
+            $this->form->getUserName() === "" ||
+            strlen($this->form->getUserName()) < 3 ||
+            false === preg_match("/^[a-zA-Z]*$/", $this->form->getFirstName())
+        ) {
+            $this->message->pushMessage('first name', false);
         }
-        return false;
     }
 
-    private function validateLastName():bool
+    private function validateLastName(): void
     {
-        if($this->form->getLastName() !== ""){
-            return true;
+        if (
+            $this->form->getUserName() === "" ||
+            strlen($this->form->getUserName()) < 3 ||
+            false === preg_match("/^[a-zA-Z]*$/", $this->form->getLastName())
+        ) {
+            $this->message->pushMessage('last name', false);
         }
-        return false;
     }
 
-    private function validateNationalityName():bool
+    private function validateNationality(): void
     {
-        if($this->form->getNationality() !== ""){
-            return true;
+        if (
+            $this->form->getUserName() === "" ||
+            strlen($this->form->getUserName()) < 3 ||
+            false === preg_match("/^[a-zA-Z]*$/", $this->form->getFirstName())
+        ) {
+            $this->message->pushMessage('nationality', false);
         }
-        return false;
     }
 
-    private function validateEmail():bool
+    private function validateEmail(): void
     {
-        if($this->form->getEmail() !== ""){
-            return true;
+        if (
+            $this->form->getUserName() === "" ||
+            false === preg_match("/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/", $this->form->getFirstName())
+        ) {
+            $this->message->pushMessage('Email', false);
         }
-        return false;
     }
 
-    private function validateMobileNumber():bool
+    private function validateMobileNumber(): void
     {
-        if($this->form->getMobileNumber() !== ""){
-            return true;
+        if (
+            $this->form->getUserName() === "" ||
+            strlen($this->form->getUserName()) < 10 || strlen($this->form->getUserName()) > 10 ||
+            false === preg_match("/^[0-9]*$/", $this->form->getFirstName())
+        ) {
+            $this->message->pushMessage('Phone Number', false);
         }
-        return false;
     }
 
-    private function validatePassword():bool
+    private function validatePassword(): void
     {
-        if($this->form->getPassword() !== ""){
-            return true;
+        if (
+            $this->form->getUserName() === "" ||
+            strlen($this->form->getUserName()) < 10 || strlen($this->form->getUserName()) > 10 ||
+            false === preg_match
+            (
+                "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",
+                $this->form->getFirstName()
+            )
+        ) {
+            $this->message->pushMessage('Password', false);
         }
-        return false;
     }
 }
