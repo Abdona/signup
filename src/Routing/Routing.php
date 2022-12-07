@@ -24,6 +24,9 @@ class Routing
             case '/signup_success':
                 header('Location:'. '/documents/signup_success.php');
                 break;
+            case '/signup_failed':
+                header('Location:'. '/documents/signup_failed.php');
+                break;
             case '/login_successfully':
                 header('Location:'. '/documents/login_success.php');
                 break;

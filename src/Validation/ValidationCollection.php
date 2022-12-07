@@ -15,6 +15,11 @@ class ValidationCollection implements Iterator
         $this->pointer = $pointer;
     }
 
+    public function getArray(): array
+    {
+        return $this->message;
+    }
+
     public function pushMessage(string $key,bool $value)
     {
         $this->message[$key] = $value;
@@ -35,7 +40,7 @@ class ValidationCollection implements Iterator
         $this->pointer ++;
     }
 
-    #[ReturnTypeWillChange] public function key()
+    public function key(): int
     {
         return $this->pointer;
     }

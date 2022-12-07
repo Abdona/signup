@@ -4,18 +4,24 @@ namespace App\Form;
 
 use App\Database\Database;
 use App\Routing\Routing;
+use App\Validation\Validate;
+use App\Validation\ValidationCollection;
 
 class FormAction
 {
     private Database $database;
     private Form $form;
     private Routing $routing;
+    private Validate $validate;
+    private ValidationCollection $validationCollection;
 
     public function __construct()
     {
         $this->database = new Database();
         $this->form = new Form();
         $this->routing = new Routing();
+        $this->validationCollection = new ValidationCollection();
+        $this->validate = new Validate($this->form,$this->validationCollection);
     }
 
     public function __invoke(): void
@@ -37,8 +43,12 @@ class FormAction
                 $_REQUEST['birth_date'],
                 $_REQUEST['address']
             );
-            $this->database->addNewUser($this->form);
-            $this->routing->route('/signup_success');
+            $this->validationCollection = $this->validate->validate();
+            if (0 === $this->validationCollection->getMessageLength()) {
+                $this->database->addNewUser($this->form);
+                $this->routing->route('/signup_success');
+            }
+            $this->routing->route('/signup_failed');
         }
     }
 }
