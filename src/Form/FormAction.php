@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Database\Database;
 use App\Routing\Routing;
+use App\Session;
 use App\Validation\Validate;
 use App\Validation\ValidationCollection;
 
@@ -44,9 +45,11 @@ class FormAction
                 $_REQUEST['address']
             );
             $this->validationCollection = $this->validate->validate();
+            $_SESSION['validation'] = $this->validationCollection;
             if (0 === $this->validationCollection->getMessageLength()) {
                 $this->database->addNewUser($this->form);
                 $this->routing->route('/signup_success');
+                return;
             }
             $this->routing->route('/signup_failed');
         }

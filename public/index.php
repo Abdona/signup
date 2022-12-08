@@ -5,6 +5,7 @@ use App\Routing\Routing;
 
 require_once realpath('../vendor/autoload.php') ;
 
+session_start();
 $route = new Routing();
 
 if (isset($_REQUEST['type']))

@@ -10,3 +10,9 @@
 <p>Leider haben Sie die Regeln nicht eingehalten :(</p>
 </body>
 </html>
+
+<?php
+
+//$ss = $_SESSION['validation'];
+echo 'hello';
+
