@@ -7,11 +7,20 @@ use mysqli_sql_exception;
 
 class Database
 {
-    private string $servername = "localhost";
-    private string $username = "root";
-    private string $password = "aaammsn1433";
-    private string $dataBaseName = "userlogin";
+    private string $servername;
+    private string $username;
+    private string $password;
+    private string $dataBaseName;
+    private array $config;
 
+    public function __construct()
+    {
+        $this->config = parse_ini_file(__DIR__.'\..\..\config.ini',true);
+        $this->servername = $this->config["dataBase"]["server"];
+        $this->username = $this->config["dataBase"]['username'];
+        $this->password = $this->config["dataBase"]['password'];
+        $this->dataBaseName = $this->config["dataBase"]['dataBaseName'];
+    }
 
     private function connectTODataBase(): ?mysqli
     {

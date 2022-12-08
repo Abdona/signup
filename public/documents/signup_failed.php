@@ -11,8 +11,3 @@
 </body>
 </html>
 
-<?php
-
-//$ss = $_SESSION['validation'];
-echo 'hello';
-
