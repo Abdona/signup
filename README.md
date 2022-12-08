@@ -1,76 +1,38 @@
-![](https://img.shields.io/badge/Microverse-blueviolet)
-
-# Project Name
-
-> One paragraph statement about the project.
-
-![screenshot](./app_screenshot.png)
-
-Additional description about the project and its features.
-
-## Built With
-
-- Major languages
-- Frameworks
-- Technologies used
-
-## Live Demo
-
-[Live Demo Link](https://livedemo.com)
-
-
 ## Getting Started
-
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
-
 
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
-
-### Setup
+- PHP 8.1
+- Composer
+- MySql Server
+- Php Storm or other IDE with terminal.
 
 ### Install
+- Run locally `git clone git@github.com:Abdona/signup.git`
+- Create local mysql Server and Import Dump file `Database\userlogin_user.sql`.
+
+### Setup
+- in `config.ini` add:
+  - `server` :`default:localhost`
+  - `username`
+  - `password`
+  - `dataBaseName`
 
 ### Usage
-
-### Run tests
-
-### Deployment
-
+- in IDE Terminal or OS Terminal (ubuntu,mac or windows):
+  - run `composer install` to download dependencies.
+  - change directory to where you cloned the repo and `cd public` where `index.php`
+  - in this directory run `php -S localhost:8000` to run a localserver .
 
 
 ## Authors
 
-👤 **Author1**
+👤 **Author**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/linkedinhandle)
-
-👤 **Author2**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/linkedinhandle)
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome!
-
-Feel free to check the [issues page](issues/).
+- LinkedIn: [Abdulrahman Naser Elawady](https://www.linkedin.com/in/abdulrahmannaserelawady/)
 
 ## Show your support
 
-Give a ⭐️ if you like this project!
+Give a ⭐ if you like this project!
 
-## Acknowledgments
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
-
-## 📝 License
-
-This project is [MIT](lic.url) licensed.
