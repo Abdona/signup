@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Validation;
 
 
+use App\Database\Database;
 use App\Form\Form;
 
 class Validate
@@ -11,11 +12,13 @@ class Validate
 
     private Form $form;
     private ValidationCollection $message;
+    private Database $database;
 
     public function __construct(Form $form, ValidationCollection $message)
     {
         $this->form = $form;
         $this->message = $message;
+        $this->database = new Database();
     }
 
     public function validate(): ValidationCollection
@@ -34,8 +37,10 @@ class Validate
     {
         if (
             0 === preg_match("/^[a-zA-Z].{3,}/", $this->form->getUserName())
+            ||
+            true === $this->database->checkUser($this->form->getUserName())
         ) {
-            $this->message->pushMessage('user name', false);
+            $this->message->pushMessage('benutzername', false);
         }
     }
 
@@ -44,7 +49,7 @@ class Validate
         if (
             0 === preg_match("/^[a-zA-Z]{3,}$/", $this->form->getFirstName())
         ) {
-            $this->message->pushMessage('first name', false);
+            $this->message->pushMessage('vorname', false);
         }
     }
 
@@ -53,7 +58,7 @@ class Validate
         if (
             0 === preg_match("/^[a-zA-Z]{3,}$/", $this->form->getLastName())
         ) {
-            $this->message->pushMessage('last name', false);
+            $this->message->pushMessage('nachname', false);
         }
     }
 
@@ -62,7 +67,7 @@ class Validate
         if (
             0 === preg_match("/^[a-zA-Z]{3,}$/", $this->form->getNationality())
         ) {
-            $this->message->pushMessage('nationality', false);
+            $this->message->pushMessage('staatsangehörigkeit', false);
         }
     }
 
@@ -80,7 +85,7 @@ class Validate
         if (
             0 === preg_match("/^[0-9]{8,}$/", $this->form->getMobileNumber())
         ) {
-            $this->message->pushMessage('Phone Number', false);
+            $this->message->pushMessage('Handnynummer', false);
         }
     }
 
@@ -92,7 +97,7 @@ class Validate
                 $this->form->getPassword()
             )
         ) {
-            $this->message->pushMessage('Password', false);
+            $this->message->pushMessage('Passwort', false);
         }
     }
 }

@@ -30,7 +30,7 @@ class FormAction
         $requestType = $_REQUEST['requestType'];
 
         if ('loggin'===$requestType) {
-            $dataBaseResponse = $this->database->getUser($_POST['username'], $_POST['password']);
+            $dataBaseResponse = $this->database->login($_POST['username'], $_POST['password']);
             ($dataBaseResponse)?$this->routing->route('/login_successfully'):$this->routing->route('/login_failed');
         }elseif ("signup" === $requestType){
             $this->form->setForm(

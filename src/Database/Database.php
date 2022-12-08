@@ -54,7 +54,7 @@ class Database
         }
     }
 
-    public function getUser (string $userName, string $password): bool
+    public function login (string $userName, string $password): bool
     {
         $conn = $this->connectTODataBase();
         $sql = "SELECT * FROM user WHERE user_name = ?;";
@@ -64,9 +64,28 @@ class Database
         $stmt->execute();
         $result = $stmt->get_result();
         $user = $result->fetch_assoc();
-        if($user !== null && $user['login_password'] === $password ){
+
+        if($user !== null && $user['login_password'] === $password )
+        {
             return true;
         }else
             return false;
+    }
+
+    public function checkUser (string $userName):bool {
+        $conn = $this->connectTODataBase();
+        $sql = "SELECT * FROM user WHERE user_name = ?;";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('s', $userName);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+
+        if ($user !== null)
+        {
+            return true;
+        }
+        return false;
     }
 }
